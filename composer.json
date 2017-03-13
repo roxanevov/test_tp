@@ -1,0 +1,13 @@
+{
+    "name": "rox/test_tp",
+    "authors": [
+        {
+            "name": "RoxaneVovard",
+            "email": "rovane.vovard@gmail.com"
+        }
+    ],
+    "require": {
+        "zendframework/zend-feed": "^2.7",
+        "zendframework/zend-http": "^2.6"
+    }
+}
