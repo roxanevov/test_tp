@@ -1,23 +1,11 @@
 <?php
+
 $pdo = new PDO('sqlite:../database.sqlite');
 
-$arts=$_GET['id_art'];
-
-if(!empty($arts)){
-	$stmt = $pdo->prepare("DELETE FROM article WHERE  id=:id");
-	$stmt->execute(['id'=>$arts]);
-	$count = $stmt->rowCount();
-	if($count == 0){
-		http_response_code(404);
-		return;
-	}
-}
 
 $stmt = $pdo->prepare('SELECT * FROM article');
 $stmt -> execute();
 $articles = $stmt-> fetchAll(PDO::FETCH_ASSOC);
-
-
 
 ?>
 
@@ -29,19 +17,18 @@ $articles = $stmt-> fetchAll(PDO::FETCH_ASSOC);
 </head>
 
 <div class="row">
- 	<?php foreach ($articles as $art) :?>
+ 	<?php foreach ($articles as $article) :?>
 
 	<div class="col-md-6">
- 		<article class="panel panel-default">
+ 		<article class="panel panel-default" id="<?php echo $article['id'] ?>">
 
- 			<h2 class="panel-heading"><?php echo $art['title']; ?></h2>
+ 			<h2 class="panel-heading"><?php echo $article['title']; ?></h2>
 			<div class="panel-body">
- 		 		<p><?php echo $art['description'];?></p>
- 		 		<a href="<?php echo $art['link'];?>"><?php echo $art['link'];?></a>
- 		 		<p><?php echo $art['author'];?></p>
+ 		 		<p><?php echo $article['description'];?></p>
+ 		 		<a href="<?php echo $article['link'];?>"><?php echo $article['link'];?></a>
+ 		 		<p><?php echo $article['author'];?></p>
 			</div>
-			<a href="?id_art=<?php echo $art['id'];?>" class="btn"><button class=" glyphicon glyphicon-remove" data-id"<?php echo $art['id'];?>"></button></a>
-
+			<a class="btn" data-id="<?php echo $article['id'];?>" href="?id=<?php echo $article['id'];?>" ><button class=" glyphicon glyphicon-remove"></button></a>
  		 </article>
 	</div>
 

@@ -16,3 +16,5 @@ foreach($feed as $item){
 print_r($stmt);
 
 ?>
+
+//zend feed reader pour recuperer flux rss et mettre dans base de donée
